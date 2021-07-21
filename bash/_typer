@@ -1,0 +1,16 @@
+# bash completion for typer
+_typer() {
+    COMPREPLY=()
+    local pre=${COMP_WORDS[COMP_CWORD-1]}
+    local cur=${COMP_WORDS[COMP_CWORD]}
+    word="-r --show --show-exported --annotate --annotate-inc-files --edoc --plt -T -D -I -pa -pz -v --version"
+    case "${pre}" in
+        "-r" | "-I" | "-T" | "-pa" | "-pz")
+            ;;
+        *)
+            COMPREPLY=( $( compgen -W "${word}" -- "${cur}" ) )
+            ;;
+    esac
+}
+
+complete -o default -F _typer typer

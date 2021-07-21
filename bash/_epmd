@@ -1,0 +1,9 @@
+# bash completion for epmd
+_epmd() {
+    COMPREPLY=()
+    local pre=${COMP_WORDS[COMP_CWORD-1]}
+    local cur=${COMP_WORDS[COMP_CWORD]}
+    COMPREPLY=( $( compgen -W "-address -port -d -debug -daemon -relaxed_command_check -packet_timeout -delay_accept -delay_write -names -kill -stop --help" -- "${cur}") )
+}
+
+complete -o default -F _epmd epmd

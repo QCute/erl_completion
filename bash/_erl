@@ -1,0 +1,92 @@
+# bash completion for erl
+_erl() {
+    COMPREPLY=()
+    local pre=${COMP_WORDS[COMP_CWORD-1]}
+    local cur=${COMP_WORDS[COMP_CWORD]}
+    # +MFlag
+    local acul=$(echo "B D E F H I L M R S T Y" | sed "s/\w/+M&acul/g")
+    local acfml=$(echo "B D E F H I L M R S T Y" | sed "s/\w/+M&acfml/g")
+    local acnl=$(echo "B D E F H I L M R S T Y" | sed "s/\w/+M&acnl/g")
+    local as=$(echo "B D E F H I L M R S T Y" | sed "s/\w/+M&as/g")
+    local asbcst=$(echo "B D E F H I L M R S T Y" | sed "s/\w/+M&asbcst/g")
+    local atags=$(echo "B D E F H I L M R S T Y" | sed "s/\w/+M&atags/g")
+    local cp=$(echo "B D E F H I L M R S T Y" | sed "s/\w/+M&cp/g")
+    local e=$(echo "B D E F H I L M R S T Y" | sed "s/\w/+M&e/g")
+    local lmbcs=$(echo "B D E F H I L M R S T Y" | sed "s/\w/+M&lmbcs/g")
+    local mbcgs=$(echo "B D E F H I L M R S T Y" | sed "s/\w/+M&mbcgs/g")
+    local mbsd=$(echo "B D E F H I L M R S T Y" | sed "s/\w/+M&mbsd/g")
+    local mmbcs=$(echo "B D E F H I L M R S T Y" | sed "s/\w/+M&mmbcs/g")
+    local mmmbc=$(echo "B D E F H I L M R S T Y" | sed "s/\w/+M&mmmbc/g")
+    local mmsbc=$(echo "B D E F H I L M R S T Y" | sed "s/\w/+M&mmsbc/g")
+    local ramv=$(echo "B D E F H I L M R S T Y" | sed "s/\w/+M&ramv/g")
+    local rmbcmt=$(echo "B D E F H I L M R S T Y" | sed "s/\w/+M&rmbcmt/g")
+    local rsbcmt=$(echo "B D E F H I L M R S T Y" | sed "s/\w/+M&rsbcmt/g")
+    local rsbcst=$(echo "B D E F H I L M R S T Y" | sed "s/\w/+M&rsbcst/g")
+    local sbct=$(echo "B D E F H I L M R S T Y" | sed "s/\w/+M&sbct/g")
+    local smbcs=$(echo "B D E F H I L M R S T Y" | sed "s/\w/+M&smbcs/g")
+    local t=$(echo "B D E F H I L M R S T Y" | sed "s/\w/+M&t/g")
+    word="-Application -args_file -async_shell_start -boot -boot_var -code_path_cache -compile -config -configfd -connect_all -cookie -detached -emu_args -emu_flavor -emu_type -env -epmd_module -erl_epmd_port -eval -extra -heart -hidden -hosts -id -init_debug -instr -loader -make -man -mode -name -no_epmd -noinput -noshell -nostick -oldshell -pa -pz -path -proto_dist -remsh -rsh -run -s -setcookie -shutdown_time -sname -start_epmd -version +a +A +B +c +C +d +dcg +e +ec +fnl +fnu +fna +hms +hmbs +hmax +hmaxel +hmaxk +hpds +hmqd +IOp +IOt +IOPp +IOPt +JPperf +L +MMamcbf +MMrmcbf +MMsco +MMscrfsd +MMscrpm +MMscs +MMmcs +MYe +MYtt +MYtp ${acul} ${acfml} ${acnl} ${as} ${asbcst} ${atags} ${cp} ${e} ${lmbcs} ${mbcgs} ${mbsd} ${mmbcs} ${mmmbc} ${mmsbc} ${ramv} ${rmbcmt} ${rsbcmt} ${rsbcst} ${sbct} ${smbcs} ${t} +Muycs +Mummc +Musac +MIscs +Mit +Mea +Mlpm +pc +P +Q +R +r +rg +S +SP +SDcpu +SDPcpu +SDio +sbt +sbwt +sbwtdcpu +sbwtdio +scl +sct +sfwi +spp +sss +sssdcpu +sssdio +stbt +sub +swct +sws +swt +swtdcpu +swtdio +t +T +v +V +W +zdbbl +zdntgc"
+    case "${pre}" in
+        "-args_file" | "-boot" | "-config" | "-pa" | "-pz" | "-path")
+            ;;
+        "-connect_all" | "-start_epmd" | "+c" | "+hmaxel" | "+hmaxk" | "+JPperf" | "+MMsco" | "+MMscrpm" | "+Musac" | "+MYe" | "+scl" | "+spp" | "+sub")
+            COMPREPLY=( $( compgen -W "true false" -- "${cur}" ) )
+            ;;
+        "-mode")
+            COMPREPLY=( $( compgen -W "interactive embedded" -- "${cur}" ) )
+            ;;
+        "-proto_dist")
+            COMPREPLY=( $( compgen -W "inet_tcp inet_tls inet6_tcp" -- "${cur}" ) )
+            ;;
+        "+B")
+            COMPREPLY=( $( compgen -W "c d i" -- "${cur}" ) )
+            ;;
+        "+C")
+            COMPREPLY=( $( compgen -W "no_time_warp single_time_warp multi_time_warp" -- "${cur}" ) )
+            ;;
+        "+hmqd")
+            COMPREPLY=( $( compgen -W "off_heap on_heap" -- "${cur}" ) )
+            ;;
+        "+M")
+            COMPREPLY=( $( compgen -W "B D E F H I L M R S T Y" -- "${cur}" ) )
+            ;;
+        "+Mea")
+            COMPREPLY=( $( compgen -W "min max r9c r10b r11b config" -- "${cur}" ) )
+            ;;
+        "+Mlpm")
+            COMPREPLY=( $( compgen -W "all no" -- "${cur}" ) )
+            ;;
+        "+pc")
+            COMPREPLY=( $( compgen -W "latin1 unicode" -- "${cur}" ) )
+            ;;
+        "+sbt")
+            COMPREPLY=( $( compgen -W "u ns ts ps s nnts nnps tnnps db" -- "${cur}" ) )
+            ;;
+        "+sbwt" | "+sbwtdcpu" | "+sbwtdio")
+            COMPREPLY=( $( compgen -W "none very_short short medium long very_long" -- "${cur}" ) )
+            ;;
+        "+sws")
+            COMPREPLY=( $( compgen -W "default legacy" -- "${cur}" ) )
+            ;;
+        "+swct" | "+swtdcpu" | "+swtdio")
+            COMPREPLY=( $( compgen -W "very_eager eager medium lazy very_lazy" -- "${cur}" ) )
+            ;;
+        "+T")
+            local level=$(seq 0 9 | tr "\n" " ")
+            COMPREPLY=( $( compgen -W "${level}" -- "${cur}" ) )
+            ;;
+        *)
+            if [[ "${as}" =~ "${pre}" ]];then
+                COMPREPLY=( $( compgen -W "bf aobf aoff aoffcbf aoffcaobf ageffcaoff ageffcbf ageffcaobf gf af" -- "${cur}" ) )
+            elif [[ "${cp}" =~ "${pre}" ]];then
+                COMPREPLY=( $( compgen -W "B D E F H  L R S @ :" -- "${cur}" ) )
+            elif [[ "${atags}" =~ "${pre}" || "${e}" =~ "${pre}" || "${ramv}" =~ "${pre}" || "${t}" =~ "${pre}" ]];then
+                COMPREPLY=( $( compgen -W "true false" -- "${cur}" ) )
+            else    
+                COMPREPLY=( $( compgen -W "${word}" -- "${cur}" ) )
+            fi
+            ;;
+    esac
+}
+
+complete -o default -F _erl erl

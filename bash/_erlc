@@ -1,0 +1,16 @@
+# bash completion for erlc
+_erlc() {
+    COMPREPLY=()
+    local pre=${COMP_WORDS[COMP_CWORD-1]}
+    local cur=${COMP_WORDS[COMP_CWORD]}
+    word="-I -o -D -W -Werror -v -b -no-server -server -M -MMD -MF -MD -MT -MQ -MP -MG + -pa -pz --help"
+    case "${pre}" in
+        "-I" | "-o" | "-MF" | "-MD" | "-pa" | "-pz")
+            ;;
+        *)
+            COMPREPLY=( $( compgen -W "${word}" -- "${cur}" ) )
+            ;;
+    esac
+}
+
+complete -o default -F _erlc erlc

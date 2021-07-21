@@ -1,0 +1,15 @@
+# bash completion for escript
+_escript() {
+    COMPREPLY=()
+    local pre=${COMP_WORDS[COMP_CWORD-1]}
+    local cur=${COMP_WORDS[COMP_CWORD]}
+    case "${pre}" in
+        "escript" | "-c" | "-d" | "-i" | "-s")
+            COMPREPLY=( $( compgen -W "-c -d -i -s" -- "${cur}") )
+            ;;
+        *)
+            ;;
+    esac
+}
+
+complete -o default -F _escript escript

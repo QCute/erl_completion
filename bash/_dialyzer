@@ -1,0 +1,16 @@
+# bash completion for dialyzer
+_dialyzer() {
+    COMPREPLY=()
+    local pre=${COMP_WORDS[COMP_CWORD-1]}
+    local cur=${COMP_WORDS[COMP_CWORD]}
+    word="--add_to_plt --apps --build_plt --check_plt -D --dump_callgraph --error_location --fullpath --get_warnings --gui -h --help -I --no_check_plt --no_indentation -o --output --output_plt -pa --plt --plt_info --plts -q --quiet -r --raw --remove_from_plt --shell --src --statistics --verbose -v --version -Wwarn -Werror_handling -Wno_behaviours -Wno_contracts -Wno_fail_call -Wno_fun_app -Wno_improper_lists -Wno_match -Wno_missing_calls -Wno_opaque -Wno_return -Wno_undefined_callbacks -Wno_unused -Wrace_conditions -Wunderspecs -Wunknown -Wunmatched_returns -Woverspecs -Wspecdiffs -Wno_underspecs"
+    case "${pre}" in
+        "--apps" | "--dump_callgraph" | "-I" | "-o" | "--output" | "-pa" | "-pz" | "-r" | "--plts")
+            ;;
+        *)
+            COMPREPLY=( $( compgen -W "${word}" -- "${cur}" ) )
+            ;;
+    esac
+}
+
+complete -o default -F _dialyzer dialyzer
